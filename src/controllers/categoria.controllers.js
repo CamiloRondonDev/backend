@@ -1,10 +1,13 @@
-const getCategorias = (req,res)=>{
+import getConnection from "./../db/database.js"
+const getCategorias = async (req,res)=>{
+        try{
+            const connection = await getConnection();
+            const result = await connection.query("SELECT CategoriaID,CategoriaNombre,Descripcion,Imagen FROM categorias")
+            res.json(result)
 
-    res.json(
-        {
-            "Categoria":"Electrodomesticos"
+        }catch(error){
+            console.error("ERROR 500")
         }
-    )
 
 }
 
